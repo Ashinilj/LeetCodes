@@ -1,0 +1,12 @@
+/**
+ * @param {number[]} nums
+ * @return {string}
+ */
+var largestNumber = function(nums) {
+    let strArray = nums.map(String);
+
+    strArray.sort((a,b) => (b+a) - (a+b));
+
+    if(strArray[0] === "0") return "0";
+    return strArray.join('');
+};
