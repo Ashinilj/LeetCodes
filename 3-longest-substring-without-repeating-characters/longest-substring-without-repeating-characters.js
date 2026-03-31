@@ -3,8 +3,8 @@
  * @return {number}
  */
 var lengthOfLongestSubstring = function(s) {
+    let left = 0, right = 0, maxLen = 0;
     let freq= new Map();
-    let left=0, right=0, maxLen=0;
 
     while(right < s.length){
         freq.set(s[right], (freq.get(s[right]) || 0) + 1);
@@ -13,8 +13,10 @@ var lengthOfLongestSubstring = function(s) {
             freq.set(s[left], freq.get(s[left]) - 1);
             left++;
         }
-        maxLen= Math.max(maxLen, right-left+1);
+
+        maxLen = Math.max(maxLen, right-left+1);
         right++;
     }
+
     return maxLen;
 };
