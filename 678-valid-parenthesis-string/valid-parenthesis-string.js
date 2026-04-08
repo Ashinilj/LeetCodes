@@ -3,33 +3,24 @@
  * @return {boolean}
  */
 var checkValidString = function(s) {
-    let openStack= [];
-    let starStack = [];
+    let low=0, high=0;
 
-    for(let i=0; i<s.length; i++){
-        let ch = s[i];
+    for(let ch of s){
         if(ch === '('){
-            openStack.push(i);
+            low++;
+            high++;
         }
-        else if(ch === '*'){
-            starStack.push(i);
+        else if(ch === ')'){
+            low--;
+            high--;
         }
-        else{
-            if(openStack.length > 0){
-                openStack.pop();
-            }
-            else if(starStack.length > 0){
-                starStack.pop();
-            }
-            else return false;
-        }
-    }
 
-    while(openStack.length > 0 && starStack.length > 0){
-        if(openStack.pop() > starStack.pop()){
-            return false;
+        else if (ch === '*'){
+            low--;
+            high++;
         }
+        if(high < 0) return false;
+        if(low < 0) low = 0;
     }
-
-    return openStack.length === 0;
+    return low === 0;
 };
